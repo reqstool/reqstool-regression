@@ -40,10 +40,10 @@ graph TB
         JA["<b>regression-java</b><br/>2 reqs &bull; 3 SVCs &bull; 2 MVRs<br/>+ annotations + test results"]
     end
 
-    C -- "imports (local)" --> A
-    C -- "imports (local)<br/>filter: excludes REQ_B02" --> B
-    PY -- "imports (git)" --> C
-    JA -- "imports (git)" --> C
+    A -->|"local import"| C
+    B -->|"local import<br/>filter: excludes REQ_B02"| C
+    C -->|"git import"| PY
+    C -->|"git import"| JA
 
     style A fill:#e8f5e9
     style B fill:#e8f5e9
