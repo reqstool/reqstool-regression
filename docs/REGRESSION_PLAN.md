@@ -553,9 +553,18 @@ graph TD
 - Same 3 local SVCs (SVC_L01, SVC_L02, SVC_L03) with identical verification types and cross-URN references
 - Same 2 MVRs (MVR_L01, MVR_L02)
 - Java FQNs: `com.reqstool.regression.RequirementsExample.*` / `com.reqstool.regression.SVCsTest.*`
-- `reqstool_config.yml`: `language: java`, `build: maven`
 - Maven surefire/failsafe XML format with identical test outcomes
 - Expected exit code: **4** (same as Python)
+
+#### reqstool_config.yml
+
+```yaml
+language: java
+build: maven
+resources:
+  test_results:
+    - test_results/**/*.xml
+```
 
 ---
 
