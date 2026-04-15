@@ -44,6 +44,8 @@ graph TB
     B -->|"local import<br/>filter: excludes REQ_B02"| C
     C -->|"git import"| PY
     C -->|"git import"| JA
+    C -.->|"implementation"| PY
+    C -.->|"implementation"| JA
 
     style A fill:#e8f5e9
     style B fill:#e8f5e9
@@ -63,7 +65,7 @@ reqstool-regression/              <-- this repo
   base-b/
     requirements.yml              (URN: regression-base-b)
     software_verification_cases.yml
-  requirements.yml                (URN: reqstool-regression, imports base-a + base-b)
+  requirements.yml                (URN: reqstool-regression, imports base-a + base-b, implements python + java)
   software_verification_cases.yml
   manual_verification_results.yml
 
@@ -89,7 +91,7 @@ reqstool-regression-java/         <-- separate repo (mirrors Python with Java ar
 |-------------|-----------------|---------------|
 | `base-a/` | L0A only | Basic req + SVC + MVR parsing in isolation |
 | `base-b/` | L0B only | Basic parsing, no MVRs |
-| `reqstool-regression/` (root) | L1 + L0A + L0B | Multi-import, filters, MVRs without test results |
+| `reqstool-regression/` (root) | L1 + L0A + L0B + L2 (via impl) | Multi-import, filters, MVRs, implementation chain pulling L2 annotations/test results |
 | `regression-python/` | L2 + L1 + L0A + L0B | Full chain: git import, annotations, tests, cross-URN refs |
 
 ### Why multiple URNs at Layer 0?
@@ -99,7 +101,16 @@ reqstool-regression-java/         <-- separate repo (mirrors Python with Java ar
 3. **Cross-URN SVC references across import sources** -- Layer 1 SVCs reference reqs from both A and B
 4. **Matches existing test patterns** -- mirrors the `sys-001 -> ext-001 + ext-002` fixture in reqstool-client
 
-A and B are independent and unaware of each other. C (Layer 1) is unaware of the Python/Java wrappers.
+A and B are independent and unaware of each other.
+
+### Two-phase traversal
+
+reqstool uses a two-phase traversal model. Both phases are configured in `requirements.yml`:
+
+1. **Import chain** (Phase 1, `imports:`) -- child pulls parent's requirements, SVCs, and MVRs. Arrows flow upward: L2 imports L1, L1 imports L0.
+2. **Implementation chain** (Phase 2, `implementations:`) -- parent declares implementation children that provide annotations, test results, and their own MVRs. Arrows flow downward: L1 declares L2 wrappers as implementations.
+
+This means Layer 1 (`reqstool-regression`) has both `imports:` (pointing to L0A, L0B) and `implementations:` (pointing to `regression-python`, `regression-java`). When reqstool enters at Layer 1, Phase 2 follows the implementation chain to collect annotations and test results from the language wrappers.
 
 ---
 
@@ -152,7 +163,7 @@ None.
 
 ### Layer 1: `reqstool-regression`
 
-#### Import configuration
+#### Import and implementation configuration
 
 ```yaml
 imports:
@@ -160,12 +171,21 @@ imports:
     - path: ./base-a
     - path: ./base-b
 
+implementations:
+  git:
+    - url: https://github.com/reqstool/reqstool-regression-python.git
+      branch: main
+    - url: https://github.com/reqstool/reqstool-regression-java.git
+      branch: main
+
 filters:
   regression-base-b:
     requirement_ids:
       excludes:
         - REQ_B02
 ```
+
+The `implementations:` section enables Phase 2 traversal -- when reqstool enters at Layer 1, it follows these pointers to collect annotations, test results, and MVRs from the language wrappers.
 
 #### Requirements (4)
 
@@ -383,7 +403,7 @@ graph LR
 
 ```mermaid
 pie title SVCs by verification type
-    "automated-test" : 7
+    "automated-test" : 8
     "manual-test" : 3
     "review" : 1
     "platform" : 1
@@ -451,9 +471,9 @@ graph TD
 
 | Value | Requirements |
 |-------|-------------|
-| shall | REQ_A01, REQ_B02 _(filtered)_, REQ_001, REQ_004, REQ_L02 |
+| shall | REQ_A01, REQ_B02 _(filtered)_, REQ_001, REQ_004 |
 | should | REQ_A02, REQ_003, REQ_L01 |
-| may | REQ_B01, REQ_002, REQ_005 _(n/a -- see note)_, REQ_L02 |
+| may | REQ_B01, REQ_002, REQ_L02 |
 
 ### Lifecycle
 
@@ -550,9 +570,10 @@ reqstool status local -p base-a
 reqstool status local -p base-b
 # Expected: 2 reqs, 0 completed, exit code 2
 
-# Entry point 3: reqstool-regression root
+# Entry point 3: reqstool-regression root (with implementations)
 reqstool status local -p .
-# Expected: 8 visible reqs (REQ_B02 filtered), auto SVCs have no test results
+# Expected: 7 visible reqs (REQ_B02 filtered, no L2 reqs)
+# Implementation chain pulls annotations + test results from L2 wrappers
 
 # Entry point 4: regression-python (full chain)
 reqstool status local -p <path-to-regression-python>
