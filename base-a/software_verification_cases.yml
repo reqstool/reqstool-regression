@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/software_verification_cases.schema.json
+
+cases:
+  - id: SVC_A01
+    requirement_ids: ["REQ_A01"]
+    title: Automated test for base functional
+    verification: automated-test
+    revision: "1.0.0"
+
+  - id: SVC_A02
+    requirement_ids: ["REQ_A02"]
+    title: Manual test for base safety
+    verification: manual-test
+    instructions: Verify safety controls are operational
+    revision: "1.0.0"
