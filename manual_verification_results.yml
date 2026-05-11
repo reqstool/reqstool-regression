@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/manual_verification_results.schema.json
+
+results:
+  - id: MVR_001
+    svc_ids: ["SVC_002"]
+    pass: true
+    comment: Manual reliability verification passed
+
+  - id: MVR_002
+    svc_ids: ["SVC_003"]
+    pass: false
+    comment: Security review identified unresolved findings

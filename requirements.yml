@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/requirements.schema.json
+
+metadata:
+  urn: reqstool-regression
+  title: Reqstool Regression
+  url: https://github.com/reqstool/reqstool-regression
+
+imports:
+  local:
+    - path: ./base-a
+    - path: ./base-b
+
+implementations:
+  git:
+    - url: https://github.com/reqstool/reqstool-regression-python.git
+      branch: main
+    - url: https://github.com/reqstool/reqstool-regression-java.git
+      branch: main
+
+filters:
+  regression-base-b:
+    requirement_ids:
+      excludes:
+        - REQ_B02
+
+requirements:
+  - id: REQ_001
+    title: Reliability requirement
+    significance: shall
+    description: Multi-SVC completed requirement with both auto and manual verification
+    rationale: Tests completion with multiple verification types
+    categories: ["reliability"]
+    revision: "1.0.0"
+
+  - id: REQ_002
+    title: Security requirement (draft)
+    significance: may
+    description: N/A draft requirement with failing MVR
+    rationale: Tests draft lifecycle with MVR failure
+    categories: ["security"]
+    revision: "1.0.0"
+    implementation: N/A
+    lifecycle:
+      state: draft
+
+  - id: REQ_003
+    title: Maintainability requirement (deprecated)
+    significance: should
+    description: Deprecated requirement with failing and missing tests
+    rationale: Tests deprecated lifecycle with test failures
+    categories: ["maintainability"]
+    revision: "1.0.0"
+    references:
+      requirement_ids:
+        - regression-base-a:REQ_A01
+    lifecycle:
+      state: deprecated
+      reason: Superseded by updated maintainability standards
+
+  - id: REQ_004
+    title: Flexibility requirement (obsolete)
+    significance: shall
+    description: Obsolete requirement with missing MVR
+    rationale: Tests obsolete lifecycle with missing manual verification
+    categories: ["flexibility"]
+    revision: "1.0.0"
+    lifecycle:
+      state: obsolete
+      reason: No longer applicable to current architecture

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/requirements.schema.json
+
+metadata:
+  urn: regression-base-b
+  title: Regression Base B
+  url: https://github.com/reqstool/reqstool-regression
+
+requirements:
+  - id: REQ_B01
+    title: Performance measurement requirement
+    significance: may
+    description: Incomplete requirement due to skipped test
+    rationale: Tests skip status preventing completion
+    categories: ["performance-efficiency"]
+    revision: "1.0.0"
+
+  - id: REQ_B02
+    title: Compatibility requirement (filtered)
+    significance: shall
+    description: Requirement excluded by Layer 1 import filter
+    rationale: Tests import filter exclusion
+    categories: ["compatibility"]
+    revision: "1.0.0"

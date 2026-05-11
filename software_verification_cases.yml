@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/software_verification_cases.schema.json
+
+cases:
+  - id: SVC_001
+    requirement_ids: ["REQ_001"]
+    title: Automated reliability test
+    verification: automated-test
+    revision: "1.0.0"
+
+  - id: SVC_002
+    requirement_ids: ["REQ_001", "regression-base-a:REQ_A01"]
+    title: Manual reliability verification
+    verification: manual-test
+    instructions: Verify reliability controls across base and parent layers
+    revision: "1.0.0"
+
+  - id: SVC_003
+    requirement_ids: ["REQ_002"]
+    title: Security review
+    verification: review
+    revision: "1.0.0"
+
+  - id: SVC_004
+    requirement_ids: ["REQ_003"]
+    title: Deprecated maintainability test
+    verification: automated-test
+    revision: "1.0.0"
+    lifecycle:
+      state: deprecated
+      reason: Associated requirement deprecated
+
+  - id: SVC_005
+    requirement_ids: ["REQ_004"]
+    title: Platform verification for flexibility
+    verification: platform
+    revision: "1.0.0"
+    lifecycle:
+      state: obsolete
+      reason: Associated requirement obsolete
+
+  - id: SVC_006
+    requirement_ids: ["regression-base-a:REQ_A02"]
+    title: Other verification for base safety
+    verification: other
+    revision: "1.0.0"
+
+  - id: SVC_007
+    requirement_ids: ["regression-base-b:REQ_B01"]
+    title: Automated performance test (skip)
+    verification: automated-test
+    revision: "1.0.0"
+
+  - id: SVC_008
+    requirement_ids: ["REQ_003"]
+    title: Automated maintainability audit (missing)
+    verification: automated-test
+    revision: "1.0.0"
