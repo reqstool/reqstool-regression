@@ -59,7 +59,6 @@ Ecosystem wrappers are **byte-equivalent in structure**: same REQ/SVC/MVR IDs, s
 | `SVC_005` | parent | REQ_004 | **platform** | **obsolete** |
 | `SVC_006` | parent | regression-base-a:REQ_A02 | **other** | effective |
 | `SVC_007` | parent | regression-base-b:REQ_B01 | automated-test | effective |
-| `SVC_008` | parent | REQ_003 | automated-test | effective |
 
 **Coverage:** all 5 verification types (`automated-test`, `manual-test`, `review`, `platform`, `other`), cross-URN references at parent and grandparent depth.
 

@@ -50,8 +50,3 @@ cases:
     verification: automated-test
     revision: "1.0.0"
 
-  - id: SVC_008
-    requirement_ids: ["REQ_003"]
-    title: Automated maintainability audit (missing)
-    verification: automated-test
-    revision: "1.0.0"

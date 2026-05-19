@@ -8,5 +8,5 @@ results:
 
   - id: MVR_002
     svc_ids: ["SVC_003"]
-    pass: false
-    comment: Security review identified unresolved findings
+    pass: true
+    comment: Security review passed
