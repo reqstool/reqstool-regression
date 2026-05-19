@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate (${{ matrix.target }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [parent, python, java, typescript]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check target exists
+        id: check
+        run: |
+          if [ -d "${{ matrix.target }}" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install reqstool
+        if: steps.check.outputs.exists == 'true'
+        run: pip install reqstool
+
+      - name: Validate ${{ matrix.target }}
+        if: steps.check.outputs.exists == 'true'
+        run: reqstool status local -p ${{ matrix.target }}
