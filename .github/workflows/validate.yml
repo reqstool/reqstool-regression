@@ -29,7 +29,7 @@ jobs:
 
       - name: Install reqstool
         if: steps.check.outputs.exists == 'true'
-        run: pip install reqstool
+        run: pip install --upgrade reqstool
 
       - name: Validate ${{ matrix.target }}
         if: steps.check.outputs.exists == 'true'
