@@ -11,11 +11,7 @@ imports:
     - path: ./base-b
 
 implementations:
-  git:
-    - url: https://github.com/reqstool/reqstool-regression-python.git
-      branch: main
-    - url: https://github.com/reqstool/reqstool-regression-java.git
-      branch: main
+  local: []
 
 filters:
   regression-base-b:
