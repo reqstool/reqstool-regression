@@ -1,0 +1,38 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+name = "reqstool-regression-python"
+version = "0.1.0"
+description = "Python regression fixture for reqstool"
+requires-python = ">=3.13"
+dependencies = ["reqstool-python-decorators"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src"]
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]
+pythonpath = ["src"]
+testpaths = ["src"]
+python_files = ["test_*.py"]
+junit_family = "xunit2"
+
+[tool.hatch.envs.dev]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "reqstool-python-decorators",
+]
+
+[tool.hatch.envs.dev.scripts]
+test = "pytest --junitxml=build/surefire/junit.xml src/test_svcs.py"
+test-it = "pytest --junitxml=build/failsafe/junit.xml src/test_svcs_it.py"
+
+[tool.hatch.build.hooks.reqstool]
+dependencies = ["reqstool-python-hatch-plugin"]
+sources = ["src"]
+test_results = ["build/surefire/junit.xml", "build/failsafe/junit.xml"]
+dataset_directory = "."
+output_directory = "build/reqstool"
