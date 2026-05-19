@@ -14,7 +14,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [parent, python, java, typescript]
+        target:
+          - fixtures/parent
+          - fixtures/ecosystems/java
+          - fixtures/ecosystems/python
+          - fixtures/ecosystems/typescript
     steps:
       - uses: actions/checkout@v4
 

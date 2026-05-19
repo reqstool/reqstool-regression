@@ -8,17 +8,21 @@ Related issues: [reqstool-client#387](https://github.com/reqstool/reqstool-clien
 
 ```
 reqstool-regression/
-├── parent/          Parent layer — shared requirements imported by all ecosystem wrappers
-│   ├── base-a/      Grandparent sub-source (urn: regression-base-a)
-│   └── base-b/      Grandparent sub-source (urn: regression-base-b)
-├── python/          Python ecosystem wrapper (urn: regression-python)        [reqstool-client#326]
-├── java/            Java ecosystem wrapper   (urn: regression-java)          [reqstool-client#327]
-└── typescript/      TypeScript ecosystem wrapper (urn: regression-typescript) [reqstool-client#385]
+├── fixtures/
+│   ├── parent/          Parent layer (urn: reqstool-regression)
+│   │   ├── base-a/      Grandparent sub-source (urn: regression-base-a)
+│   │   └── base-b/      Grandparent sub-source (urn: regression-base-b)
+│   └── ecosystems/
+│       ├── java/        Java ecosystem wrapper (urn: regression-java)        [reqstool-client#327]
+│       ├── python/      Python ecosystem wrapper (urn: regression-python)    [reqstool-client#326]
+│       └── typescript/  TypeScript ecosystem wrapper (urn: regression-typescript) [reqstool-client#385]
+├── docs/
+└── README.md
 ```
 
 **Entry-point behavior:**
-- `reqstool status local -p parent` — aggregated view across all ecosystem wrappers
-- `reqstool status local -p python` (or `java`, `typescript`) — single-ecosystem view
+- `reqstool status local -p fixtures/parent` — aggregated view across all ecosystem wrappers
+- `reqstool status local -p fixtures/ecosystems/python` (or `java`, `typescript`) — single-ecosystem view
 
 Ecosystem wrappers are **byte-equivalent in structure**: same REQ/SVC/MVR IDs, same test-outcome pattern, same `annotations.yml` key shape. Only language-specific FQNs and source files differ.
 
@@ -63,12 +67,7 @@ Each ecosystem wrapper adds 3 local SVCs (`SVC_L01`–`SVC_L03`) covering the wr
 
 ### Test outcomes (per ecosystem wrapper)
 
-| State | Trigger |
-|-------|---------|
-| PASS | SVC_001 (unit + integration), SVC_A01, SVC_L01 |
-| FAIL | SVC_004 (deprecated req), SVC_L02 |
-| SKIP | SVC_007 (skipped test) |
-| MISSING | SVC_008 (no test mapped) |
+All ecosystem tests pass. FAIL / SKIP / MISSING edge cases are covered by the inline fixtures in `reqstool-client/tests/fixtures/`.
 
 ### MVRs
 

@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/annotations.schema.json
+---
+requirement_annotations:
+  implementations:
+    REQ_L01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample.interact"
+    regression-base-a:REQ_A01:
+      - elementKind: "CLASS"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample"
+    regression-base-b:REQ_B01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample.measurePerf"
+    reqstool-regression:REQ_001:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample.checkReliability"
+    reqstool-regression:REQ_003:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample.validateSecurity"
+    reqstool-regression:REQ_004:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.RequirementsExample.maintainLegacy"
+  tests:
+    SVC_L01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testInteraction"
+    SVC_L03:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testGrandparentVerify"
+    regression-base-a:SVC_A01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testBaseFunctional"
+    regression-base-b:SVC_B01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testBasePerf"
+    reqstool-regression:SVC_001:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testReliability"
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTestIT.testReliabilityIntegration"
+    reqstool-regression:SVC_004:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testSecurity"
+    reqstool-regression:SVC_007:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "com.reqstool.regression.SVCsTest.testPerfSkip"
