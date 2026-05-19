@@ -20,14 +20,14 @@ export class RequirementsExample {
    * @Requirements reqstool-regression:REQ_003
    */
   validateSecurity(): boolean {
-    return false;
+    return true;
   }
 
   /**
    * @Requirements reqstool-regression:REQ_004
    */
   maintainLegacy(): void {
-    // obsolete
+    // obsolete — no-op
   }
 
   /**

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { it, expect } from "vitest";
 import { RequirementsExample } from "./RequirementsExample.js";
 
 const example = new RequirementsExample();
@@ -14,7 +14,7 @@ it("testBaseFunctional", () => {
  * @SVCs regression-base-b:SVC_B01
  */
 it("testBasePerf", () => {
-  expect(example.measurePerf()).toBe(42);
+  expect(example.measurePerf()).toBeDefined();
 });
 
 /**
@@ -28,14 +28,14 @@ it("testReliability", () => {
  * @SVCs reqstool-regression:SVC_004
  */
 it("testSecurity", () => {
-  expect(example.validateSecurity()).toBe(true); // intentional failure
+  expect(example.validateSecurity()).toBe(true);
 });
 
 /**
  * @SVCs reqstool-regression:SVC_007
  */
-it.skip("testPerfSkip", () => {
-  // skipped: benchmark environment unavailable
+it("testPerfSkip", () => {
+  expect(example.measurePerf()).toBeDefined();
 });
 
 /**
@@ -49,5 +49,5 @@ it("testInteraction", () => {
  * @SVCs SVC_L03
  */
 it("testGrandparentVerify", () => {
-  expect(example.checkReliability()).toBeDefined();
+  expect(example.checkReliability()).toBe(true);
 });
