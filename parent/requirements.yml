@@ -11,7 +11,8 @@ imports:
     - path: ./base-b
 
 implementations:
-  local: []
+  local:
+    - path: ../python
 
 filters:
   regression-base-b:
