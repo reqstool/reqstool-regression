@@ -39,9 +39,6 @@ requirement_annotations:
     reqstool-regression:SVC_007:
       - elementKind: "METHOD"
         fullyQualifiedName: "test_svcs.testPerfSkip"
-    reqstool-regression:SVC_008:
-      - elementKind: "METHOD"
-        fullyQualifiedName: "test_svcs.testSecurityAudit"
     SVC_L01:
       - elementKind: "METHOD"
         fullyQualifiedName: "test_svcs.testInteraction"
