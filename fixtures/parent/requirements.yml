@@ -12,9 +12,9 @@ imports:
 
 implementations:
   local:
-    - path: ../python
-    - path: ../java
-    - path: ../typescript
+    - path: ../ecosystems/python
+    - path: ../ecosystems/java
+    - path: ../ecosystems/typescript
 
 filters:
   regression-base-b:
