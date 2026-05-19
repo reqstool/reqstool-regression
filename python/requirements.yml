@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/requirements.schema.json
+
+metadata:
+  urn: regression-python
+  title: Regression Python
+  url: https://github.com/reqstool/reqstool-regression
+
+imports:
+  local:
+    - path: ../parent
+
+requirements:
+  - id: REQ_L01
+    title: Interaction capability requirement
+    significance: should
+    description: Completed requirement with cross-URN reference to parent
+    rationale: Tests cross-URN requirement references to parent layer
+    categories: ["interaction-capability"]
+    revision: "1.0.0"
+    references:
+      requirement_ids:
+        - reqstool-regression:REQ_001
+
+  - id: REQ_L02
+    title: Compatibility requirement
+    significance: may
+    description: N/A completed requirement with cross-URN reference to grandparent
+    rationale: Tests cross-URN requirement references at grandparent depth
+    categories: ["compatibility"]
+    revision: "1.0.0"
+    implementation: N/A
+    references:
+      requirement_ids:
+        - regression-base-a:REQ_A01

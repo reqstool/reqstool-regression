@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/annotations.schema.json
+
+requirement_annotations:
+  implementations:
+    regression-base-a:REQ_A01:
+      - elementKind: "CLASS"
+        fullyQualifiedName: "requirements_example.RequirementsExample"
+    regression-base-b:REQ_B01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "requirements_example.RequirementsExample.measure_perf"
+    reqstool-regression:REQ_001:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "requirements_example.RequirementsExample.check_reliability"
+    reqstool-regression:REQ_003:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "requirements_example.RequirementsExample.validate_security"
+    reqstool-regression:REQ_004:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "requirements_example.RequirementsExample.maintain_legacy"
+    REQ_L01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "requirements_example.RequirementsExample.interact"
+
+  tests:
+    regression-base-a:SVC_A01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_base_functional"
+    regression-base-b:SVC_B01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_base_perf"
+    reqstool-regression:SVC_001:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_reliability"
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs_it.test_reliability_integration"
+    reqstool-regression:SVC_004:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_security"
+    reqstool-regression:SVC_007:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_perf_skip"
+    reqstool-regression:SVC_008:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_security_audit"
+    SVC_L01:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_interaction"
+    SVC_L03:
+      - elementKind: "METHOD"
+        fullyQualifiedName: "test_svcs.test_grandparent_verify"
