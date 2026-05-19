@@ -1,0 +1,13 @@
+{
+  "name": "reqstool-regression-typescript",
+  "version": "0.0.1",
+  "description": "TypeScript ecosystem regression fixture for reqstool",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --reporter=junit --outputFile=test_results/junit/TEST-test_svcs.xml"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.0"
+  }
+}

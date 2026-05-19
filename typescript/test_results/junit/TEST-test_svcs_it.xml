@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_svcs_it" tests="1" errors="0" skipped="0" failures="0" time="0.045">
+  <testcase name="testReliabilityIntegration" classname="test_svcs_it" time="0.045" />
+</testsuite>
