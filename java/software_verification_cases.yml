@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/reqstool/reqstool-client/main/src/reqstool/resources/schemas/v1/software_verification_cases.schema.json
+
+cases:
+  - id: SVC_L01
+    requirement_ids: ["REQ_L01", "reqstool-regression:REQ_001"]
+    title: Automated interaction test
+    verification: automated-test
+    revision: "1.0.0"
+
+  - id: SVC_L02
+    requirement_ids: ["REQ_L02"]
+    title: Manual compatibility verification
+    verification: manual-test
+    instructions: Verify compatibility with referenced base requirement
+    revision: "1.0.0"
+
+  - id: SVC_L03
+    requirement_ids: ["regression-base-a:REQ_A01"]
+    title: Automated grandparent verification
+    verification: automated-test
+    revision: "1.0.0"

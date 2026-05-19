@@ -13,6 +13,7 @@ imports:
 implementations:
   local:
     - path: ../python
+    - path: ../java
 
 filters:
   regression-base-b:
