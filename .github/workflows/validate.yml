@@ -20,7 +20,7 @@ jobs:
           - fixtures/ecosystems/python
           - fixtures/ecosystems/typescript
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check target exists
         id: check
