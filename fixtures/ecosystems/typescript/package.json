@@ -7,7 +7,7 @@
     "test": "vitest run --reporter=junit --outputFile=test_results/junit/TEST-test_svcs.xml"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
+    "typescript": "^6.0.0",
     "vitest": "^4.0.0"
   }
 }
