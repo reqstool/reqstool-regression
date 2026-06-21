@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-python@v6
         if: steps.check.outputs.exists == 'true'
         with:
-          python-version: "3.13"
+          python-version: "3.14"
 
       - name: Install reqstool
         if: steps.check.outputs.exists == 'true'
