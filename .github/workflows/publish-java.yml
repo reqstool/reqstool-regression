@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - uses: actions/setup-java@v5
         with:
@@ -33,6 +34,27 @@ jobs:
           server-id: github
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
+
+      # The pom keeps a static 0.1.0 so the fixture stays a plain, realistic
+      # reqstool-instrumented project -- that is what it exists to be. The
+      # published version is derived here instead, from the commit count, so
+      # every push produces a distinct coordinate.
+      #
+      # Without this the deploy 409s: GitHub Packages refuses to replace an
+      # existing version, and 0.1.0 was published once on 2026-05-19. Bumping by
+      # hand would be forgotten; skipping when the version exists would be worse,
+      # quietly serving a changed fixture under an unchanged version.
+      - name: Derive the version from git
+        id: version
+        run: |
+          VERSION="0.1.0-$(git rev-list --count HEAD)"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing as $VERSION"
+
+      - name: Set the version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: mvn --batch-mode versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
 
       - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy -DskipTests
