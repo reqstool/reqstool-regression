@@ -21,17 +21,21 @@ jobs:
           - fixtures/ecosystems/typescript
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Check target exists
         id: check
+        env:
+          TARGET: ${{ matrix.target }}
         run: |
-          if [ -d "${{ matrix.target }}" ]; then
+          if [ -d "$TARGET" ]; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         if: steps.check.outputs.exists == 'true'
         with:
           python-version: "3.13"
@@ -42,4 +46,6 @@ jobs:
 
       - name: Validate ${{ matrix.target }}
         if: steps.check.outputs.exists == 'true'
-        run: reqstool status local -p ${{ matrix.target }}
+        env:
+          TARGET: ${{ matrix.target }}
+        run: reqstool status local -p "$TARGET"
