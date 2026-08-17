@@ -40,6 +40,10 @@ jobs:
         with:
           python-version: "3.13"
 
+      # Deliberately unpinned, unlike every other tool install in the org. This
+      # repo exists to check the fixtures against whatever reqstool currently
+      # releases; pinning would test them against a fixed past version and stop
+      # catching the regressions it is named for.
       - name: Install reqstool
         if: steps.check.outputs.exists == 'true'
         run: pip install reqstool
